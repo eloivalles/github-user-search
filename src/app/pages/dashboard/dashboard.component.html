@@ -1,0 +1,35 @@
+<form [formGroup]="searchForm" (submit)="searchUsers()">
+  <div class="search-bar">
+    <mat-form-field class="search-bar-input">
+      <input type="text" placeholder="Search users" matInput formControlName="searchControl" [matAutocomplete]="auto" 
+        (input)="updateOptions(searchForm.controls['searchControl'].value)">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of options" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete> 
+    </mat-form-field>
+    <button type="submit" mat-icon-button color="primary" aria-label="search" [disabled]="!searchForm.valid">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+</form>
+
+<table class="users-list">
+  <tr *ngFor="let item of $data | async">
+    <td class="users-list-avatar">
+      <img [src]="item.avatar_url" alt="avatar">
+    </td>
+    <td class="users-list-name">
+      <p>{{item.login}}</p>
+    </td>
+    <td class="users-list-name">
+      <p><a [href]="item.html_url" target="_blank">{{item.html_url}}</a> </p>
+    </td>
+    <td>
+      <button mat-icon-button color="primary" aria-label="view" (click)="goToDetails(item.login)">
+        <mat-icon class="users-list-visit">pageview</mat-icon>
+      </button>
+    </td>
+  </tr>   
+</table>
