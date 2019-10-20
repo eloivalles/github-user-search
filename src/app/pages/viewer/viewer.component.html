@@ -12,7 +12,7 @@
     <h3>Followers</h3>
       <ul>
         <li *ngFor="let follower of data.followers">
-          {{ follower.name}}
+          {{ follower.login}}
         </li>
       </ul>
       <p *ngIf="data.followers.length === 0">no followers</p>
